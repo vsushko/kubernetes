@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+data:
+  username: dnN1c2hrbwo=
+  password: YWRtaW4xMjMK
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  restartPolicy: Never
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    env:
+    - name: "app.username"
+      valueFrom:
+        secretKeyRef:
+          name: app-secret
+          key: username
+    - name: "app.password"
+      valueFrom:
+        secretKeyRef:
+          name: app-secret
+          key: password
+    args:
+    - env

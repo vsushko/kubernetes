@@ -15,16 +15,8 @@ spec:
   containers:
   - name: ubuntu
     image: ubuntu
-    env:
-    - name: "request.timeout"
-      valueFrom:
-        configMapKeyRef:
-          name: app-properties
-          key: timeout
-    - name: "application.url"
-      valueFrom:
-        configMapKeyRef:
-          name: app-properties
-          key: appUrl
+    envFrom:
+    - configMapRef:
+        name: app-properties
     args:
     - env
